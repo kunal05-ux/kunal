@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunal | Portfolio</title>
+    <style>
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { line-height: 1.6; color: #333; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* Navigation */
+        nav { 
+            position: fixed; width: 100%; padding: 20px 0; z-index: 1000; 
+            transition: all 0.4s ease; background: transparent; 
+        }
+        nav.sticky { background: #1a1a1a; padding: 10px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        nav ul { display: flex; justify-content: center; list-style: none; }
+        nav ul li { margin: 0 20px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: 600; font-size: 1rem; transition: 0.3s; }
+        nav ul li a:hover { color: #00d2ff; }
+
+        /* Sections */
+        section { padding: 100px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Home Section */
+        #home { background: #111; color: white; justify-content: center; position: relative; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; border: 4px solid #00d2ff; margin-bottom: 20px; }
+        
+        /* Skills & Projects Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; width: 90%; max-width: 1100px; margin-top: 40px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid #00d2ff; }
+        .card:hover { transform: translateY(-10px); }
+
+        /* Contact Buttons */
+        .btn { background: #00d2ff; color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; margin: 10px; display: inline-block; font-weight: bold; }
+        .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <img src="kunal.jpg.webp" alt="Kunal" class="profile-img">
+        <h1 id="typing-text">Hi, I'm Kunal</h1>
+        <p>Turning code into art.</p>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2>About Me</h2>
+        <p style="max-width: 600px; margin: 0 auto;">I am a developer based in India, passionate about creating seamless user interfaces. I specialize in building responsive and high-performance web applications.</p>
+    </section>
+
+    <section id="skills" class="reveal" style="background: #f4f7f6;">
+        <h2>Technical Skills</h2>
+        <div class="grid">
+            <div class="card"><h3>Frontend</h3><p>React, Tailwind, HTML5</p></div>
+            <div class="card"><h3>Backend</h3><p>Node.js, Express, MongoDB</p></div>
+            <div class="card"><h3>Tools</h3><p>Git, VS Code, Figma</p></div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <h2>My Work</h2>
+        <div class="grid">
+            <div class="card"><h3>Portfolio Site</h3><p>The one you are looking at right now!</p></div>
+            <div class="card"><h3>App Project</h3><p>A custom mobile-first web application.</p></div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal" style="background: #111; color: white;">
+        <h2>Let's Connect</h2>
+        <p>Email: <strong>kunal.110604@gmqil.com</strong></p>
+        <div style="margin-top: 30px;">
+            <a href="mailto:kunal.110604@gmqil.com" class="btn">Email Me</a>
+            <a href="https://instagram.com/kunal_05" target="_blank" class="btn insta-btn">Instagram (@kunal_05)</a>
+        </div>
+    </section>
+
+    <script>
+        // 1. Sticky Navbar Logic
+        window.addEventListener("scroll", function() {
+            var nav = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                nav.classList.add("sticky");
+            } else {
+                nav.classList.remove("sticky");
+            }
+        });
+
+        // 2. Scroll Reveal Animation Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        // 3. Simple Typing Effect for Name
+        const text = "Hi, I'm Kunal";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typing-text").innerHTML = text.substring(0, index + 1);
+                index++;
+                setTimeout(typeWriter, 150);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
+
+</body>
+</html>
